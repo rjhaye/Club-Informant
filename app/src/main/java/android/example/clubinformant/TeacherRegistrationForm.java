@@ -1,5 +1,6 @@
 package android.example.clubinformant;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -22,6 +23,7 @@ public class TeacherRegistrationForm extends AppCompatActivity {
     }
 
     public void goToSignInBtn(View view) {
-
+        Intent signInActivity = new Intent(TeacherRegistrationForm.this, SignInActivity.class);
+        startActivity(signInActivity);
     }
 }
