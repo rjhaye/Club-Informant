@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,37 +7,97 @@
     android:background="@drawable/background"
     tools:context=".MainActivity">
 
+
     <ImageView
         android:id="@+id/iv_main_image"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/main_image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent=".50"
+        app:layout_constraintHorizontal_bias="0.487"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintWidth_percent=".9"
+        tools:layout_editor_absoluteY="3dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/top_teacher_guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/main_image" />
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".6" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/top_student_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".68" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/top_sign_in_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".76" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/bottom_sign_in_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".84" />
+
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_register_as_a_teacher"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/iv_main_image"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:backgroundTint="#7471FF"
+        android:fontFamily="@font/lobster_regular"
         android:text="Register as a Teacher"
-        app:cornerRadius="50dp" />
+        android:textAllCaps="false"
+        android:textSize="20dp"
+        app:cornerRadius="50dp"
+        app:layout_constraintBottom_toBottomOf="@id/top_student_guideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/top_teacher_guideline"
+        app:layout_constraintWidth_percent=".8" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_register_as_a_student"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_below="@+id/btn_register_as_a_teacher"
         android:backgroundTint="#92E3A9"
+        android:fontFamily="@font/lobster_regular"
         android:text="Register as a Student"
-        app:cornerRadius="50dp" />
+        android:textAllCaps="false"
+        android:textSize="20dp"
+        app:cornerRadius="50dp"
+        app:layout_constraintBottom_toBottomOf="@+id/top_sign_in_guideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/top_student_guideline"
+        app:layout_constraintWidth_percent=".8" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_sign_in"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_below="@+id/btn_register_as_a_student"
         android:backgroundTint="#EF8B8B"
+        android:fontFamily="@font/lobster_regular"
         android:text="Sign In"
-        app:cornerRadius="50dp" />
-</RelativeLayout>
+        android:textAllCaps="false"
+        android:textSize="20dp"
+        app:cornerRadius="50dp"
+        app:layout_constraintBottom_toBottomOf="@+id/bottom_sign_in_guideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/top_sign_in_guideline"
+        app:layout_constraintWidth_percent=".8" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
