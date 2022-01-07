@@ -8,12 +8,14 @@ public class Student {
     private String studentEmail;
     private String id;
 
+
     public Student(String studentId, String studentFName, String studentLName, String clubChoice, String studentEmail, String id) {
         this.studentId = studentId;
         this.studentFName = studentFName;
         this.studentLName = studentLName;
         this.clubChoice = clubChoice;
         this.studentEmail = studentEmail;
+        this.id = id;
     }
 
     public String getStudentId() {
@@ -54,5 +56,13 @@ public class Student {
 
     public void setStudentEmail(String studentEmail) {
         this.studentEmail = studentEmail;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

@@ -16,8 +16,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -77,23 +80,56 @@ public class StudentRegistrationForm extends AppCompatActivity {
     }
 
     public void signUpBtn(View view) {
+        DatabaseReference clubsNumberReference = FirebaseDatabase.getInstance().getReference("Clubs/" + club + "/");
         if (studentId.getText().toString().isEmpty() || fname.getText().toString().isEmpty() || lname.getText().toString().isEmpty() || eMail.getText().toString().isEmpty()
                 || password.getText().toString().isEmpty() || registrationKey.getText().toString().isEmpty()) {
             Toast.makeText(this, "Empty field detected.", Toast.LENGTH_SHORT).show();
             return;
         }
-        mAuth.createUserWithEmailAndPassword(eMail.getText().toString(), password.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        //This will check the number of clubs. Toast will be displayed if it's full.
+        clubsNumberReference.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    saveInfo();
-                    Toast.makeText(StudentRegistrationForm.this, "Registered Successfully!", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(StudentRegistrationForm.this, HomeActivity.class);
-                    startActivity(intent);
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.getChildrenCount() >= 180) {
+                    Toast.makeText(StudentRegistrationForm.this, "This club is already full.", Toast.LENGTH_SHORT).show();
+                } else {
+/*                    DatabaseReference registrationKeyReference = FirebaseDatabase.getInstance().getReference("Keys/" + "Students' Registration Key/");
+                    registrationKeyReference.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if (snapshot.getValue().toString().equals(registrationKey)) {
+
+                            } else {
+                                Toast.makeText(StudentRegistrationForm.this, "Incorrect Registration Key.", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });*/
+                    mAuth.createUserWithEmailAndPassword(eMail.getText().toString(), password.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                saveInfo();
+                                Toast.makeText(StudentRegistrationForm.this, "Registered Successfully!", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(StudentRegistrationForm.this, HomeActivity.class);
+                                startActivity(intent);
+                            } else {
+                                Toast.makeText(StudentRegistrationForm.this, task.getException().getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
                 }
             }
-        });
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });//End of checking
     }
 
     public void goToSignInBtn(View view) {
