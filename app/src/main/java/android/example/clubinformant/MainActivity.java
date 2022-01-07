@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void signInBtn(View view) {
-        Intent signIn = new Intent(MainActivity.this, TeacherRegistrationForm.class);
+        Intent signIn = new Intent(MainActivity.this, SignInActivity.class);
         startActivity(signIn);
     }
 }
