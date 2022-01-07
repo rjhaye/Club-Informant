@@ -93,22 +93,6 @@ public class StudentRegistrationForm extends AppCompatActivity {
                 if (snapshot.getChildrenCount() >= 180) {
                     Toast.makeText(StudentRegistrationForm.this, "This club is already full.", Toast.LENGTH_SHORT).show();
                 } else {
-/*                    DatabaseReference registrationKeyReference = FirebaseDatabase.getInstance().getReference("Keys/" + "Students' Registration Key/");
-                    registrationKeyReference.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            if (snapshot.getValue().toString().equals(registrationKey)) {
-
-                            } else {
-                                Toast.makeText(StudentRegistrationForm.this, "Incorrect Registration Key.", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                        }
-                    });*/
                     mAuth.createUserWithEmailAndPassword(eMail.getText().toString(), password.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
@@ -140,7 +124,6 @@ public class StudentRegistrationForm extends AppCompatActivity {
     public void saveInfo() {
         DatabaseReference referenceByClub = FirebaseDatabase.getInstance().getReference("Clubs/" + club + "/" + (lname.getText().toString() + ", " +
                 fname.getText().toString()));
-//        DatabaseReference referenceByUserId = FirebaseDatabase.getInstance().getReference("Users/" + FirebaseAuth.getInstance().getCurrentUser().getUid());
         Student newUser = new Student(studentId.getText().toString(), fname.getText().toString(), lname.getText().toString(),
                 club, eMail.getText().toString(), FirebaseAuth.getInstance().getCurrentUser().getUid());
         referenceByClub.setValue(newUser).addOnFailureListener(e -> Toast.makeText(StudentRegistrationForm.this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show());

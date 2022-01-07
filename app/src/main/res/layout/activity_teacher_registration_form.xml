@@ -33,6 +33,7 @@
         android:gravity="center"
         android:hint="First Name"
         android:importantForAutofill="no"
+        android:inputType="textCapWords"
         android:singleLine="true"
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -51,6 +52,7 @@
         android:gravity="center"
         android:hint="Last Name"
         android:importantForAutofill="no"
+        android:inputType="textCapWords"
         android:singleLine="true"
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -125,6 +127,7 @@
         android:layout_marginTop="15dp"
         android:backgroundTint="@color/pastel_purple"
         android:fontFamily="@font/lobster_regular"
+        android:onClick="signUpBtn"
         android:text="Sign Up"
         android:textAllCaps="false"
         android:textSize="20dp"
@@ -133,8 +136,7 @@
         app:layout_constraintHeight_percent=".08"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/et_teacher_registration_key_sign_up"
-        app:layout_constraintWidth_percent=".5"
-        android:onClick="signUpBtn"/>
+        app:layout_constraintWidth_percent=".5" />
 
     <LinearLayout
         android:id="@+id/ll_division"
@@ -172,6 +174,7 @@
         android:layout_height="0dp"
         android:backgroundTint="@color/pastel_red"
         android:fontFamily="@font/lobster_regular"
+        android:onClick="goToSignInBtn"
         android:text="Sign In"
         android:textAllCaps="false"
         android:textSize="20dp"
@@ -180,7 +183,6 @@
         app:layout_constraintHeight_percent=".08"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ll_division"
-        app:layout_constraintWidth_percent=".5"
-        android:onClick="goToSignInBtn"/>
+        app:layout_constraintWidth_percent=".5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
