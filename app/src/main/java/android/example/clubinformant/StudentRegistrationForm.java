@@ -7,8 +7,17 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
@@ -21,6 +30,7 @@ public class StudentRegistrationForm extends AppCompatActivity {
     private EditText eMail;
     private EditText password;
     private EditText registrationKey;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,12 +42,14 @@ public class StudentRegistrationForm extends AppCompatActivity {
     }
 
     public void initWidgets() {
+        studentId = findViewById(R.id.et_student_id_sign_up);
         fname = findViewById(R.id.et_student_fname_sign_up);
         lname = findViewById(R.id.et_student_lname_sign_up);
         clubSpinner = findViewById(R.id.spinner_club_choices);
         eMail = findViewById(R.id.et_student_email_sign_up);
         password = findViewById(R.id.et_student_password_sign_up);
         registrationKey = findViewById(R.id.et_student_registration_key_sign_up);
+        mAuth = FirebaseAuth.getInstance();
     }
 
     public void implementSpinner() {
@@ -65,11 +77,36 @@ public class StudentRegistrationForm extends AppCompatActivity {
     }
 
     public void signUpBtn(View view) {
+        if (studentId.getText().toString().isEmpty() || fname.getText().toString().isEmpty() || lname.getText().toString().isEmpty() || eMail.getText().toString().isEmpty()
+                || password.getText().toString().isEmpty() || registrationKey.getText().toString().isEmpty()) {
+            Toast.makeText(this, "Empty field detected.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        mAuth.createUserWithEmailAndPassword(eMail.getText().toString(), password.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                    saveInfo();
+                    Toast.makeText(StudentRegistrationForm.this, "Registered Successfully!", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(StudentRegistrationForm.this, HomeActivity.class);
+                    startActivity(intent);
+                }
+            }
+        });
 
     }
 
     public void goToSignInBtn(View view) {
         Intent signInActivity = new Intent(StudentRegistrationForm.this, SignInActivity.class);
         startActivity(signInActivity);
+    }
+
+    public void saveInfo() {
+        DatabaseReference referenceByClub = FirebaseDatabase.getInstance().getReference("Clubs/" + club + "/" + (lname.getText().toString() + ", " +
+                fname.getText().toString()));
+//        DatabaseReference referenceByUserId = FirebaseDatabase.getInstance().getReference("Users/" + FirebaseAuth.getInstance().getCurrentUser().getUid());
+        Student newUser = new Student(studentId.getText().toString(), fname.getText().toString(), lname.getText().toString(),
+                club, eMail.getText().toString(), FirebaseAuth.getInstance().getCurrentUser().getUid());
+        referenceByClub.setValue(newUser).addOnFailureListener(e -> Toast.makeText(StudentRegistrationForm.this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show());
     }
 }

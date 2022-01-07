@@ -32,6 +32,7 @@
             app:layout_constraintTop_toBottomOf="@id/top_guideline" />
 
         <EditText
+            android:inputType="number"
             android:id="@+id/et_student_id_sign_up"
             android:layout_width="0dp"
             android:layout_height="50dp"
