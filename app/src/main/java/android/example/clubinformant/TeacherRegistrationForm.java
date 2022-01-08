@@ -65,7 +65,7 @@ public class TeacherRegistrationForm extends AppCompatActivity {
     }
 
     public void saveInfo() {
-        DatabaseReference userReference = FirebaseDatabase.getInstance().getReference("Users/Teachers/" +FirebaseAuth.getInstance().getCurrentUser().getUid());
+        DatabaseReference userReference = FirebaseDatabase.getInstance().getReference("Users/Teachers/" + FirebaseAuth.getInstance().getCurrentUser().getUid());
         Teacher newUser = new Teacher(fname.getText().toString(), lname.getText().toString(), eMail.getText().toString(),
                 FirebaseAuth.getInstance().getCurrentUser().getUid(), "Teacher");
         userReference.setValue(newUser);
