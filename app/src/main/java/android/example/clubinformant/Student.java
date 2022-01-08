@@ -7,15 +7,17 @@ public class Student {
     private String clubChoice;
     private String studentEmail;
     private String id;
+    private String status;
 
 
-    public Student(String studentId, String studentFName, String studentLName, String clubChoice, String studentEmail, String id) {
+    public Student(String studentId, String studentFName, String studentLName, String clubChoice, String studentEmail, String id, String status) {
         this.studentId = studentId;
         this.studentFName = studentFName;
         this.studentLName = studentLName;
         this.clubChoice = clubChoice;
         this.studentEmail = studentEmail;
         this.id = id;
+        this.status = status;
     }
 
     public String getStudentId() {
@@ -64,5 +66,13 @@ public class Student {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

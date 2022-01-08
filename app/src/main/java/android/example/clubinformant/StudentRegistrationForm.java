@@ -111,7 +111,6 @@ public class StudentRegistrationForm extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });//End of checking
     }
@@ -124,8 +123,11 @@ public class StudentRegistrationForm extends AppCompatActivity {
     public void saveInfo() {
         DatabaseReference referenceByClub = FirebaseDatabase.getInstance().getReference("Clubs/" + club + "/" + (lname.getText().toString() + ", " +
                 fname.getText().toString()));
+        DatabaseReference referenceByUser = FirebaseDatabase.getInstance().getReference("Users/Students" + FirebaseAuth.getInstance().getCurrentUser().getUid() + "/");
         Student newUser = new Student(studentId.getText().toString(), fname.getText().toString(), lname.getText().toString(),
-                club, eMail.getText().toString(), FirebaseAuth.getInstance().getCurrentUser().getUid());
+                club, eMail.getText().toString(), FirebaseAuth.getInstance().getCurrentUser().getUid(), "Student");
         referenceByClub.setValue(newUser).addOnFailureListener(e -> Toast.makeText(StudentRegistrationForm.this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show());
+        //TODO: Kailangan ba ng addOnFailureLister?
+        referenceByUser.setValue(newUser);
     }
 }
