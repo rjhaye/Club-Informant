@@ -42,6 +42,7 @@
             android:fontFamily="@font/lobster_regular"
             android:hint="Student's ID"
             android:importantForAutofill="no"
+            android:inputType="number"
             android:singleLine="true"
             android:textSize="25sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -59,6 +60,7 @@
             android:gravity="center"
             android:hint="First Name"
             android:importantForAutofill="no"
+            android:inputType="textCapWords"
             android:singleLine="true"
             android:textSize="25sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -76,6 +78,7 @@
             android:gravity="center"
             android:hint="Last Name"
             android:importantForAutofill="no"
+            android:inputType="textCapWords"
             android:singleLine="true"
             android:textSize="25sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -103,7 +106,7 @@
                 android:textSize="25sp" />
 
             <Spinner
-                android:id="@+id/spinner_club_choices_sign_up"
+                android:id="@+id/spinner_club_choices"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical" />

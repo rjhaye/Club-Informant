@@ -11,10 +11,14 @@
         <entry key="..\:/AppDevelopment/Club-Informant/app/src/main/res/drawable/ic_background.xml" value="0.3828125" />
         <entry key="..\:/AppDevelopment/Club-Informant/app/src/main/res/drawable/ic_key.xml" value="0.3828125" />
         <entry key="..\:/AppDevelopment/Club-Informant/app/src/main/res/drawable/vertical_bar.xml" value="0.3828125" />
+        <entry key="..\:/AppDevelopment/Club-Informant/app/src/main/res/layout/activity_home.xml" value="0.36666666666666664" />
         <entry key="..\:/AppDevelopment/Club-Informant/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
         <entry key="..\:/AppDevelopment/Club-Informant/app/src/main/res/layout/activity_sign_in.xml" value="0.36666666666666664" />
         <entry key="..\:/AppDevelopment/Club-Informant/app/src/main/res/layout/activity_student_registration_form.xml" value="0.36666666666666664" />
-        <entry key="..\:/AppDevelopment/Club-Informant/app/src/main/res/layout/activity_teacher_registration_form.xml" value="0.36666666666666664" />
+        <entry key="..\:/AppDevelopment/Club-Informant/app/src/main/res/layout/activity_teacher_registration_form.xml" value="0.33" />
+        <entry key="..\:/AppDevelopment/Club-Informant/app/src/main/res/layout/custom_simple_spinner_dropdown_item.xml" value="0.36666666666666664" />
+        <entry key="..\:/AppDevelopment/Club-Informant/app/src/main/res/layout/custom_simple_spinner_item.xml" value="0.36666666666666664" />
+        <entry key="..\:/AppDevelopment/Club-Informant/app/src/main/res/layout/custom_toast_view.xml" value="0.36666666666666664" />
       </map>
     </option>
   </component>

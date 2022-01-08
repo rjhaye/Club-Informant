@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SignInActivity"
-    android:background="@drawable/background">
+    android:background="@drawable/background"
+    tools:context=".SignInActivity">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/top_guideline"
@@ -15,13 +15,14 @@
         app:layout_constraintGuide_percent=".1" />
 
     <ImageView
-        app:layout_constraintTop_toBottomOf="@id/top_guideline"
         android:id="@+id/iv_sign_in_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_sign_in_image"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/top_guideline" />
+
     <EditText
         android:id="@+id/et_email_sign_in"
         android:layout_width="0dp"
@@ -60,13 +61,27 @@
         app:layout_constraintTop_toBottomOf="@id/et_email_sign_in"
         app:layout_constraintWidth_percent=".9" />
 
+    <TextView
+        android:id="@+id/tv_forgot_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/forgot_password"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_password_sign_in"
+        android:onClick="forgotPasswordBtn"
+        />
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_teacher_sign_up"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="10dp"
         android:backgroundTint="@color/pastel_red"
         android:fontFamily="@font/lobster_regular"
+        android:onClick="signInBtn"
         android:text="Sign In"
         android:textAllCaps="false"
         android:textSize="20dp"
@@ -74,9 +89,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent=".08"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/et_password_sign_in"
-        app:layout_constraintWidth_percent=".5"
-        android:onClick="signInBtn"/>
+        app:layout_constraintTop_toBottomOf="@id/tv_forgot_password"
+        app:layout_constraintWidth_percent=".5" />
 
     <LinearLayout
         android:id="@+id/ll_division"
@@ -114,6 +128,7 @@
         android:layout_height="0dp"
         android:backgroundTint="@color/pastel_purple"
         android:fontFamily="@font/lobster_regular"
+        android:onClick="goToSignUpBtn"
         android:text="Sign Up"
         android:textAllCaps="false"
         android:textSize="20dp"
@@ -122,7 +137,6 @@
         app:layout_constraintHeight_percent=".08"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ll_division"
-        app:layout_constraintWidth_percent=".5"
-        android:onClick="goToSignUpBtn"/>
+        app:layout_constraintWidth_percent=".5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
