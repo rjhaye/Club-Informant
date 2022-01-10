@@ -7,143 +7,239 @@
     tools:context=".SettingsFragment">
 
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/iv_profile_picture"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_gravity="center_horizontal"
-            android:src="@drawable/select_image" />
+            android:layout_marginTop="20dp"
+            android:src="@drawable/select_image"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/tv_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:fontFamily="@font/lobster_regular"
+            android:text="Welcome, User!"
+            android:textSize="30sp"
+            app:layout_constraintLeft_toLeftOf="@id/iv_profile_picture"
+            app:layout_constraintRight_toRightOf="@id/iv_profile_picture"
+            app:layout_constraintTop_toBottomOf="@id/iv_profile_picture" />
 
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/top_left_guideline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent=".05" />
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_basic_info"
+            android:layout_width="170dp"
+            android:layout_height="130dp"
+            android:layout_marginTop="10dp"
+            android:minWidth="170dp"
+            android:minHeight="130dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="10dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/card_contact_info"
+            app:layout_constraintTop_toBottomOf="@id/tv_user_name">
 
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/top_center_left_guideline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.45" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/top_center_right_guideline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.5" />
+                <ImageView
+                    android:id="@+id/iv_basic_info_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_basic_info"
+                    app:layout_constraintBottom_toTopOf="@id/tv_basic_info_text"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/top_right_guideline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.95" />
+                <TextView
+                    android:id="@+id/tv_basic_info_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Basic Info"
+                    android:textSize="25sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="@+id/iv_basic_info_icon"
+                    app:layout_constraintRight_toRightOf="@id/iv_basic_info_icon"
+                    app:layout_constraintTop_toBottomOf="@id/iv_basic_info_icon" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardView"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:elevation="20dp"
-                app:cardCornerRadius="20dp"
-                app:layout_constraintBottom_toTopOf="@+id/left_center_top_guideline"
-                app:layout_constraintEnd_toEndOf="@id/top_center_left_guideline"
-                app:layout_constraintStart_toStartOf="@id/top_left_guideline"
-                app:layout_constraintTop_toTopOf="@+id/left_top_guideline">
+        </androidx.cardview.widget.CardView>
 
-            </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_contact_info"
+            android:layout_width="170dp"
+            android:layout_height="130dp"
+            android:layout_marginTop="10dp"
+            android:minWidth="170dp"
+            android:minHeight="130dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="10dp"
+            app:layout_constraintLeft_toRightOf="@id/card_basic_info"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_user_name">
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:elevation="20dp"
-                app:cardCornerRadius="20dp"
-                app:layout_constraintBottom_toTopOf="@+id/left_center_top_guideline"
-                app:layout_constraintEnd_toStartOf="@+id/top_right_guideline"
-                app:layout_constraintStart_toStartOf="@+id/top_center_right_guideline"
-                app:layout_constraintTop_toBottomOf="@+id/left_top_guideline">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-            </androidx.cardview.widget.CardView>
+                <ImageView
+                    android:id="@+id/iv_contact_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_contact_info"
+                    app:layout_constraintBottom_toTopOf="@id/tv_contact_info_text"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:elevation="20dp"
-                app:cardCornerRadius="20dp"
-                app:layout_constraintBottom_toTopOf="@+id/left_center_bottom_guideline"
-                app:layout_constraintEnd_toStartOf="@+id/top_right_guideline"
-                app:layout_constraintStart_toStartOf="@+id/top_center_right_guideline"
-                app:layout_constraintTop_toTopOf="@+id/left_center_top_guideline">
-
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:elevation="20dp"
-                app:cardCornerRadius="20dp"
-                app:layout_constraintBottom_toTopOf="@+id/left_bottom_guideline"
-                app:layout_constraintEnd_toStartOf="@+id/top_right_guideline"
-                app:layout_constraintStart_toStartOf="@+id/top_left_guideline"
-                app:layout_constraintTop_toTopOf="@+id/left_center_bottom_guideline">
-
-            </androidx.cardview.widget.CardView>
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/left_top_guideline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_percent=".05" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/left_center_top_guideline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.3" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/left_center_bottom_guideline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.6" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/left_bottom_guideline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.9" />
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="165dp"
-                android:layout_height="189dp"
-                android:elevation="20dp"
-                app:cardCornerRadius="20dp"
-                app:layout_constraintBottom_toTopOf="@+id/left_center_bottom_guideline"
-                app:layout_constraintEnd_toEndOf="@id/top_center_left_guideline"
-                app:layout_constraintStart_toStartOf="@id/top_left_guideline"
-                app:layout_constraintTop_toTopOf="@+id/left_center_top_guideline">
-
-            </androidx.cardview.widget.CardView>
+                <TextView
+                    android:id="@+id/tv_contact_info_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Contact Info"
+                    android:textSize="25sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="@id/iv_contact_info"
+                    app:layout_constraintRight_toRightOf="@id/iv_contact_info"
+                    app:layout_constraintTop_toBottomOf="@id/iv_contact_info" />
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_about_app"
+            android:layout_width="170dp"
+            android:layout_height="130dp"
+            android:layout_marginTop="10dp"
+            android:minWidth="170dp"
+            android:minHeight="130dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="10dp"
+            app:layout_constraintLeft_toLeftOf="@id/card_basic_info"
+            app:layout_constraintTop_toBottomOf="@+id/card_basic_info">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/ic_about_app_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_about_app"
+                    app:layout_constraintBottom_toTopOf="@id/tv_about_app_text"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_about_app_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="About App"
+                    android:textSize="25sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="@id/ic_about_app_icon"
+                    app:layout_constraintRight_toRightOf="@id/ic_about_app_icon"
+                    app:layout_constraintTop_toBottomOf="@id/ic_about_app_icon" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_log_out"
+            android:layout_width="170dp"
+            android:layout_height="130dp"
+            android:layout_marginTop="10dp"
+            android:minWidth="170dp"
+            android:minHeight="130dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="10dp"
+            app:layout_constraintLeft_toRightOf="@id/card_about_app"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/card_contact_info">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/iv_log_out_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_log_out"
+                    app:layout_constraintBottom_toTopOf="@id/tv_log_out_text"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_log_out_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Log Out"
+                    android:textSize="25sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="@id/iv_log_out_icon"
+                    app:layout_constraintRight_toRightOf="@id/iv_log_out_icon"
+                    app:layout_constraintTop_toBottomOf="@id/iv_log_out_icon" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="130dp"
+            android:layout_marginTop="10dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="10dp"
+            app:layout_constraintLeft_toLeftOf="@id/card_about_app"
+            app:layout_constraintRight_toRightOf="@id/card_log_out"
+            app:layout_constraintTop_toBottomOf="@id/card_about_app"
+            app:layout_constraintWidth_percent=".9">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/ic_change_credentials_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_change_credentials"
+                    app:layout_constraintBottom_toTopOf="@id/tv_change_credentials_text"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_change_credentials_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Change Email/Password"
+                    android:textSize="25sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="@id/ic_change_credentials_icon"
+                    app:layout_constraintRight_toRightOf="@id/ic_change_credentials_icon"
+                    app:layout_constraintTop_toBottomOf="@id/ic_change_credentials_icon" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
