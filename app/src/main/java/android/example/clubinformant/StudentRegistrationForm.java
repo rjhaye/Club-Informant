@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -24,7 +25,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class StudentRegistrationForm extends AppCompatActivity {
+public class StudentRegistrationForm extends AppCompatActivity implements View.OnClickListener {
     private EditText studentId;
     private EditText fname;
     private EditText lname;
@@ -34,6 +35,8 @@ public class StudentRegistrationForm extends AppCompatActivity {
     private EditText password;
     private EditText registrationKey;
     private FirebaseAuth mAuth;
+    private MaterialButton signUpBtn;
+    private MaterialButton signInBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +44,7 @@ public class StudentRegistrationForm extends AppCompatActivity {
         setContentView(R.layout.activity_student_registration_form);
         initWidgets();
         implementSpinner();
+        signUpBtn.setOnClickListener(this);
 
     }
 
@@ -53,6 +57,8 @@ public class StudentRegistrationForm extends AppCompatActivity {
         password = findViewById(R.id.et_student_password_sign_up);
         registrationKey = findViewById(R.id.et_student_registration_key_sign_up);
         mAuth = FirebaseAuth.getInstance();
+        signUpBtn = findViewById(R.id.btn_student_sign_up);
+        signInBtn = findViewById(R.id.btn_student_sign_in);
     }
 
     public void implementSpinner() {
@@ -79,51 +85,57 @@ public class StudentRegistrationForm extends AppCompatActivity {
         });
     }
 
-    public void signUpBtn(View view) {
-        DatabaseReference clubsNumberReference = FirebaseDatabase.getInstance().getReference("Clubs/" + club + "/");
-        if (studentId.getText().toString().isEmpty() || fname.getText().toString().isEmpty() || lname.getText().toString().isEmpty() || eMail.getText().toString().isEmpty()
-                || password.getText().toString().isEmpty() || registrationKey.getText().toString().isEmpty()) {
-            Toast.makeText(this, "Empty field detected.", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        //This will check the number of clubs. Toast will be displayed if it's full.
-        clubsNumberReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.getChildrenCount() >= 180) {
-                    Toast.makeText(StudentRegistrationForm.this, "This club is already full.", Toast.LENGTH_SHORT).show();
-                } else {
-                    mAuth.createUserWithEmailAndPassword(eMail.getText().toString(), password.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                saveInfo();
-                                Toast.makeText(StudentRegistrationForm.this, "Registered Successfully!", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(StudentRegistrationForm.this, HomeActivity.class);
-                                startActivity(intent);
-                            } else {
-                                Toast.makeText(StudentRegistrationForm.this, task.getException().getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_student_sign_up:
+                DatabaseReference clubsNumberReference = FirebaseDatabase.getInstance().getReference("Clubs/" + club + "/");
+                if (studentId.getText().toString().isEmpty() || fname.getText().toString().isEmpty() || lname.getText().toString().isEmpty() || eMail.getText().toString().isEmpty()
+                        || password.getText().toString().isEmpty() || registrationKey.getText().toString().isEmpty()) {
+                    Toast.makeText(this, "Empty field detected.", Toast.LENGTH_SHORT).show();
+                    return;
                 }
-            }
+                //This will check the number of clubs. Toast will be displayed if it's full.
+                clubsNumberReference.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.getChildrenCount() >= 180) {
+                            Toast.makeText(StudentRegistrationForm.this, "This club is already full.", Toast.LENGTH_SHORT).show();
+                        } else {
+                            mAuth.createUserWithEmailAndPassword(eMail.getText().toString(), password.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()) {
+                                        saveInfo();
+                                        Toast.makeText(StudentRegistrationForm.this, "Registered Successfully!", Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(StudentRegistrationForm.this, HomeActivity.class);
+                                        startActivity(intent);
+                                    } else {
+                                        Toast.makeText(StudentRegistrationForm.this, task.getException().getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
+                        }
+                    }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
-        });//End of checking
-    }
-
-    public void goToSignInBtn(View view) {
-        Intent signInActivity = new Intent(StudentRegistrationForm.this, SignInActivity.class);
-        startActivity(signInActivity);
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                    }
+                });//End of checking
+                break;
+            case R.id.btn_student_sign_in:
+                Intent signInActivity = new Intent(StudentRegistrationForm.this, SignInActivity.class);
+                startActivity(signInActivity);
+                break;
+            default:
+                break;
+        }
     }
 
     public void saveInfo() {
         DatabaseReference referenceByClub = FirebaseDatabase.getInstance().getReference("Clubs/" + club + "/" + (lname.getText().toString() + ", " +
                 fname.getText().toString()));
-        DatabaseReference referenceByUser = FirebaseDatabase.getInstance().getReference("Users/Students" + FirebaseAuth.getInstance().getCurrentUser().getUid() + "/");
+        DatabaseReference referenceByUser = FirebaseDatabase.getInstance().getReference("Users/" + FirebaseAuth.getInstance().getCurrentUser().getUid() + "/");
         Student newUser = new Student(studentId.getText().toString(), fname.getText().toString(), lname.getText().toString(),
                 club, eMail.getText().toString(), FirebaseAuth.getInstance().getCurrentUser().getUid(), "Student");
         referenceByClub.setValue(newUser).addOnFailureListener(e -> Toast.makeText(StudentRegistrationForm.this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show());
