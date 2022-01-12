@@ -133,11 +133,14 @@ public class StudentRegistrationForm extends AppCompatActivity implements View.O
     }
 
     public void saveInfo() {
+        //Saving info in Clubs directory
         DatabaseReference referenceByClub = FirebaseDatabase.getInstance().getReference("Clubs/" + club + "/" + (lname.getText().toString() + ", " +
                 fname.getText().toString()));
+        //Saving info in Users directory
         DatabaseReference referenceByUser = FirebaseDatabase.getInstance().getReference("Users/" + FirebaseAuth.getInstance().getCurrentUser().getUid() + "/");
-        Student newUser = new Student(studentId.getText().toString(), fname.getText().toString(), lname.getText().toString(),
-                club, eMail.getText().toString(), FirebaseAuth.getInstance().getCurrentUser().getUid(), "Student");
+        //Adding the data
+        Student newUser = new Student(studentId.getText().toString(), fname.getText().toString(), lname.getText().toString(), club, eMail.getText().toString(),
+                FirebaseAuth.getInstance().getCurrentUser().getUid(), "Student");
         referenceByClub.setValue(newUser).addOnFailureListener(e -> Toast.makeText(StudentRegistrationForm.this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show());
         //TODO: Kailangan ba ng addOnFailureLister?
         referenceByUser.setValue(newUser);

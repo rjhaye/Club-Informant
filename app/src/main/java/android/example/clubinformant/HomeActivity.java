@@ -1,7 +1,6 @@
 package android.example.clubinformant;
 
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -69,12 +68,14 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void getUserData() {
-        DatabaseReference userNameReference = FirebaseDatabase.getInstance().getReference("Users/" + user.getUid() + "/studentFName");
+        DatabaseReference userNameReference = FirebaseDatabase.getInstance().getReference("Users/" + user.getUid());
         userNameReference.addValueEventListener(new ValueEventListener() {
+
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                userName = snapshot.getValue().toString();
-                bundle.putString("userName", userName);
+//                bundle.putString("fullName", snapshot.child("lName").getValue().toString() + ", " + snapshot.child("firstName").getValue().toString());
+                bundle.putString("fullName", snapshot.child("lastName").getValue().toString() + ", " + snapshot.child("firstName").getValue().toString());
+
             }
 
             @Override

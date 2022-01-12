@@ -1,47 +1,46 @@
 package android.example.clubinformant;
 
 public class Student {
-    private String studentId;
-    private String studentFName;
-    private String studentLName;
-    private String clubChoice;
-    private String studentEmail;
     private String id;
+    private String firstName;
+    private String lastName;
+    private String clubChoice;
+    private String email;
+    private String uid;
     private String status;
 
-
-    public Student(String studentId, String studentFName, String studentLName, String clubChoice, String studentEmail, String id, String status) {
-        this.studentId = studentId;
-        this.studentFName = studentFName;
-        this.studentLName = studentLName;
-        this.clubChoice = clubChoice;
-        this.studentEmail = studentEmail;
+    public Student(String id, String firstName, String lastName, String clubChoice, String email, String uid, String status) {
         this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.clubChoice = clubChoice;
+        this.email = email;
+        this.uid = uid;
         this.status = status;
     }
 
-    public String getStudentId() {
-        return studentId;
+    public String getId() {
+        return id;
     }
 
-    public void setStudentId(String studentId) {
-        this.studentId = studentId;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public String getStudentFName() {
-        return studentFName;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setStudentFName(String studentFName) {
-        this.studentFName = studentFName;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getStudentLName() {
-        return studentLName;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setStudentLName(String studentLName) {
-        this.studentLName = studentLName;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getClubChoice() {
@@ -52,20 +51,20 @@ public class Student {
         this.clubChoice = clubChoice;
     }
 
-    public String getStudentEmail() {
-        return studentEmail;
+    public String getEmail() {
+        return email;
     }
 
-    public void setStudentEmail(String studentEmail) {
-        this.studentEmail = studentEmail;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getId() {
-        return id;
+    public String getUid() {
+        return uid;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 
     public String getStatus() {

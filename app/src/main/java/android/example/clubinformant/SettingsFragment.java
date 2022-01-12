@@ -44,7 +44,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
         logOutBtn.setOnClickListener(this);
         changeCredentialsBtn.setOnClickListener(this);
         if (bundle != null) {
-            String name = bundle.getString("userName");
+            String name = bundle.getString("fullName");
             userName.setText(name);
         }
         return view;
