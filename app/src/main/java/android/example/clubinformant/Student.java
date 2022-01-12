@@ -9,6 +9,9 @@ public class Student {
     private String uid;
     private String status;
 
+    public Student() {
+    }
+
     public Student(String id, String firstName, String lastName, String clubChoice, String email, String uid, String status) {
         this.id = id;
         this.firstName = firstName;
