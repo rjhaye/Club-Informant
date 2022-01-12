@@ -30,7 +30,6 @@
         android:layout_height="0dp"
         android:backgroundTint="#7471FF"
         android:fontFamily="@font/lobster_regular"
-        android:onClick="teacherRegisterBtn"
         android:text="Register as a Teacher"
         android:textAllCaps="false"
         android:textSize="20dp"
@@ -49,7 +48,6 @@
         android:layout_below="@+id/btn_register_as_a_teacher"
         android:backgroundTint="#92E3A9"
         android:fontFamily="@font/lobster_regular"
-        android:onClick="studentRegisterBtn"
         android:text="Register as a Student"
         android:textAllCaps="false"
         android:textSize="20dp"
@@ -61,13 +59,12 @@
         app:layout_constraintWidth_percent=".8" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_sign_in"
+        android:id="@+id/btn_go_to_sign_in"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_below="@+id/btn_register_as_a_student"
         android:backgroundTint="#EF8B8B"
         android:fontFamily="@font/lobster_regular"
-        android:onClick="signInBtn"
         android:text="Sign In"
         android:textAllCaps="false"
         android:textSize="20dp"

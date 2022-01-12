@@ -70,18 +70,15 @@
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/et_password_sign_in"
-        android:onClick="forgotPasswordBtn"
-        />
+        app:layout_constraintTop_toBottomOf="@id/et_password_sign_in" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_teacher_sign_up"
+        android:id="@+id/btn_sign_in"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="10dp"
         android:backgroundTint="@color/pastel_red"
         android:fontFamily="@font/lobster_regular"
-        android:onClick="signInBtn"
         android:text="Sign In"
         android:textAllCaps="false"
         android:textSize="20dp"
@@ -100,7 +97,7 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_teacher_sign_up">
+        app:layout_constraintTop_toBottomOf="@+id/btn_sign_in">
 
         <TextView
             android:layout_width="50dp"
@@ -123,12 +120,11 @@
     </LinearLayout>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_sign_in"
+        android:id="@+id/btn_sign_up"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:backgroundTint="@color/pastel_purple"
         android:fontFamily="@font/lobster_regular"
-        android:onClick="goToSignUpBtn"
         android:text="Sign Up"
         android:textAllCaps="false"
         android:textSize="20dp"

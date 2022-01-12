@@ -1,42 +1,42 @@
 package android.example.clubinformant;
 
 public class Teacher {
-    private String teacherFName;
-    private String teacherLName;
-    private String teacherEmail;
+    private String fName;
+    private String lName;
+    private String eMail;
     private String id;
     private String status;
 
-    public Teacher(String teacherFName, String teacherLName, String teacherEmail, String id, String status) {
-        this.teacherFName = teacherFName;
-        this.teacherLName = teacherLName;
-        this.teacherEmail = teacherEmail;
+    public Teacher(String fName, String lName, String eMail, String id, String status) {
+        this.fName = fName;
+        this.lName = lName;
+        this.eMail = eMail;
         this.id = id;
         this.status = status;
     }
 
-    public String getTeacherFName() {
-        return teacherFName;
+    public String fName() {
+        return fName;
     }
 
-    public void setTeacherFName(String teacherFName) {
-        this.teacherFName = teacherFName;
+    public void fName(String fName) {
+        this.fName = fName;
     }
 
-    public String getTeacherLName() {
-        return teacherLName;
+    public String lNrLName() {
+        return lName;
     }
 
-    public void setTeacherLName(String teacherLName) {
-        this.teacherLName = teacherLName;
+    public void lNrLName(String lName) {
+        this.lName = lName;
     }
 
-    public String getTeacherEmail() {
-        return teacherEmail;
+    public String eMail() {
+        return eMail;
     }
 
-    public void setTeacherEmail(String teacherEmail) {
-        this.teacherEmail = teacherEmail;
+    public void eMail(String eMail) {
+        this.eMail = eMail;
     }
 
     public String getId() {
