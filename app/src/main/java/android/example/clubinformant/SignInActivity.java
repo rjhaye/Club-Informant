@@ -56,6 +56,9 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Toast.makeText(SignInActivity.this, "Logged in successful!", Toast.LENGTH_SHORT).show();
+                            Intent homeIntent = new Intent(SignInActivity.this, HomeActivity.class);
+                            homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(homeIntent);
                         } else {
                             Toast.makeText(SignInActivity.this, task.getException().getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                         }

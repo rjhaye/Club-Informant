@@ -20,12 +20,14 @@ public class HomeActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseUser user;
     private String userName;
+    private Bundle bundle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         initWidgets();
+        bundle.putString("userName", "Smith");
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MembersFragment()).commit();
         navigate();
     }
@@ -33,6 +35,7 @@ public class HomeActivity extends AppCompatActivity {
     public void initWidgets() {
         chipNavigationBar = findViewById(R.id.bottom_nav_bar);
         chipNavigationBar.setItemSelected(R.id.menu_home, true);
+        bundle = new Bundle();
 //        mAuth = FirebaseAuth.getInstance();
 //        user = mAuth.getCurrentUser();
     }
@@ -57,6 +60,7 @@ public class HomeActivity extends AppCompatActivity {
                     default:
                         break;
                 }
+                fragment.setArguments(bundle);
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
             }
         });
