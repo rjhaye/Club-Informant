@@ -23,6 +23,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
     private CardView logOutBtn;
     private CardView changeCredentialsBtn;
     FirebaseAuth user;
+    Bundle bundle;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,24 +43,23 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
         aboutAppBtn.setOnClickListener(this);
         logOutBtn.setOnClickListener(this);
         changeCredentialsBtn.setOnClickListener(this);
-        user = FirebaseAuth.getInstance();
-        //Added
-        Bundle bundle = this.getArguments();
         if (bundle != null) {
             String name = bundle.getString("userName");
-            Log.d("BundleValues", name);
+            userName.setText(name);
         }
-        //
         return view;
     }
 
     public void initWidgets(View view) {
+        userName = view.findViewById(R.id.tv_user_name);
         userName = view.findViewById(R.id.tv_user_name);
         basicInfoBtn = view.findViewById(R.id.card_basic_info);
         contactInfoBtn = view.findViewById(R.id.card_contact_info);
         aboutAppBtn = view.findViewById(R.id.card_about_app);
         logOutBtn = view.findViewById(R.id.card_log_out);
         changeCredentialsBtn = view.findViewById(R.id.card_change_credentials);
+        bundle = this.getArguments();
+        user = FirebaseAuth.getInstance();
     }
 
     @Override

@@ -1,6 +1,7 @@
 package android.example.clubinformant;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,7 +28,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         initWidgets();
-        bundle.putString("userName", "Smith");
+        getUserData();
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MembersFragment()).commit();
         navigate();
     }
@@ -38,6 +39,7 @@ public class HomeActivity extends AppCompatActivity {
         bundle = new Bundle();
 //        mAuth = FirebaseAuth.getInstance();
 //        user = mAuth.getCurrentUser();
+        user = FirebaseAuth.getInstance().getCurrentUser();
     }
 
 
@@ -66,12 +68,13 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
-/*    private void getUserData() {
+    private void getUserData() {
         DatabaseReference userNameReference = FirebaseDatabase.getInstance().getReference("Users/" + user.getUid() + "/studentFName");
         userNameReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 userName = snapshot.getValue().toString();
+                bundle.putString("userName", userName);
             }
 
             @Override
@@ -79,5 +82,5 @@ public class HomeActivity extends AppCompatActivity {
 
             }
         });
-    }*/
+    }
 }
