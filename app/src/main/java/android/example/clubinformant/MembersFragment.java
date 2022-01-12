@@ -57,7 +57,7 @@ public class MembersFragment extends Fragment {
                 switch (club) {
                     case "AZTECH CLUB":
                         DatabaseReference aztechReference = FirebaseDatabase.getInstance().getReference("Clubs/AZTECH CLUB");
-                        aztechReference.addValueEventListener(new ValueEventListener() {
+                        aztechReference.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                 Student studentInfo;
@@ -76,7 +76,7 @@ public class MembersFragment extends Fragment {
                         break;
                     case "MAHARLIKA CLUB":
                         DatabaseReference maharlikaReference = FirebaseDatabase.getInstance().getReference("Clubs/MAHARLIKA CLUB");
-                        maharlikaReference.addValueEventListener(new ValueEventListener() {
+                        maharlikaReference.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                 Student studentInfo;
@@ -95,7 +95,7 @@ public class MembersFragment extends Fragment {
                         break;
                     case "PANDAYWIKA CLUB":
                         DatabaseReference pandayWikaReference = FirebaseDatabase.getInstance().getReference("Clubs/PANDAYWIKA CLUB");
-                        pandayWikaReference.addValueEventListener(new ValueEventListener() {
+                        pandayWikaReference.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                 Student studentInfo;
@@ -114,7 +114,7 @@ public class MembersFragment extends Fragment {
                         break;
                     case "TEATRO MILENYO CLUB":
                         DatabaseReference teatroMilenyoReference = FirebaseDatabase.getInstance().getReference("Clubs/TEATRO MILENYO CLUB");
-                        teatroMilenyoReference.addValueEventListener(new ValueEventListener() {
+                        teatroMilenyoReference.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                 Student studentInfo;
@@ -133,7 +133,7 @@ public class MembersFragment extends Fragment {
                         break;
                     case "WE MATTER CLUB":
                         DatabaseReference weMatterReference = FirebaseDatabase.getInstance().getReference("Clubs/WE MATTER CLUB");
-                        weMatterReference.addValueEventListener(new ValueEventListener() {
+                        weMatterReference.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                 Student studentInfo;
