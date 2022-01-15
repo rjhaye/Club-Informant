@@ -1,11 +1,15 @@
 package android.example.clubinformant;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -16,6 +20,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class TeacherRegistrationForm extends AppCompatActivity implements View.OnClickListener {
     private EditText fname;
@@ -26,6 +34,19 @@ public class TeacherRegistrationForm extends AppCompatActivity implements View.O
     private FirebaseAuth mAuth;
     private MaterialButton signUpBtn;
     private MaterialButton signInBtn;
+    private CircleImageView profilePicture;
+    private FirebaseStorage storage;
+    private Uri imageUri;
+    ActivityResultLauncher<String> mGetContent = registerForActivityResult(new ActivityResultContracts.GetContent(), new ActivityResultCallback<Uri>() {
+        @Override
+        public void onActivityResult(Uri result) {
+            if (result != null) {
+                profilePicture.setImageURI(result);
+                imageUri = result;
+            }
+
+        }
+    });
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +55,8 @@ public class TeacherRegistrationForm extends AppCompatActivity implements View.O
         initWidgets();
         signUpBtn.setOnClickListener(this);
         signInBtn.setOnClickListener(this);
+        profilePicture.setOnClickListener(this);
+
     }
 
     public void initWidgets() {
@@ -45,12 +68,16 @@ public class TeacherRegistrationForm extends AppCompatActivity implements View.O
         mAuth = FirebaseAuth.getInstance();
         signUpBtn = findViewById(R.id.btn_teacher_sign_up);
         signInBtn = findViewById(R.id.btn_teacher_sign_in);
+        profilePicture = findViewById(R.id.iv_teacher_select_image);
+        storage = FirebaseStorage.getInstance();
     }
-
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.iv_teacher_select_image:
+                mGetContent.launch("image/*");
+                break;
             case R.id.btn_teacher_sign_up:
                 if (fname.getText().toString().isEmpty() || lname.getText().toString().isEmpty() || eMail.getText().toString().isEmpty() || password.getText().toString().isEmpty() ||
                         registrationKey.getText().toString().isEmpty()) {
@@ -63,6 +90,7 @@ public class TeacherRegistrationForm extends AppCompatActivity implements View.O
                         if (task.isSuccessful()) {
                             Toast.makeText(TeacherRegistrationForm.this, "Registered Successfully!", Toast.LENGTH_SHORT).show();
                             saveInfo();
+                            uploadImage();
                             Intent intent = new Intent(TeacherRegistrationForm.this, HomeActivity.class);
                             startActivity(intent);
                         }
@@ -78,10 +106,17 @@ public class TeacherRegistrationForm extends AppCompatActivity implements View.O
         }
     }
 
+    private void uploadImage() {
+        if (imageUri != null) {
+            StorageReference storageReference = storage.getReference("images/teachers/" + FirebaseAuth.getInstance().getCurrentUser().getUid());
+            storageReference.putFile(imageUri);
+        }
+    }
+
     public void saveInfo() {
         DatabaseReference userReference = FirebaseDatabase.getInstance().getReference("Users/" + FirebaseAuth.getInstance().getCurrentUser().getUid());
-        Teacher newUser = new Teacher(fname.getText().toString(), lname.getText().toString(), eMail.getText().toString(),
-                FirebaseAuth.getInstance().getCurrentUser().getUid(), "Teacher");
+        Teacher newUser = new Teacher(fname.getText().toString(), lname.getText().toString(), eMail.getText().toString(), "Teacher",
+                FirebaseAuth.getInstance().getCurrentUser().getUid());
         userReference.setValue(newUser);
     }
 }

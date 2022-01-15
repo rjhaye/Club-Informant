@@ -19,7 +19,6 @@ public class HomeActivity extends AppCompatActivity {
     ChipNavigationBar chipNavigationBar;
     private FirebaseAuth mAuth;
     private FirebaseUser user;
-    private String userName;
     private Bundle bundle;
 
     @Override
@@ -36,8 +35,6 @@ public class HomeActivity extends AppCompatActivity {
         chipNavigationBar = findViewById(R.id.bottom_nav_bar);
         chipNavigationBar.setItemSelected(R.id.menu_home, true);
         bundle = new Bundle();
-//        mAuth = FirebaseAuth.getInstance();
-//        user = mAuth.getCurrentUser();
         user = FirebaseAuth.getInstance().getCurrentUser();
     }
 
@@ -73,9 +70,7 @@ public class HomeActivity extends AppCompatActivity {
 
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                bundle.putString("fullName", snapshot.child("lName").getValue().toString() + ", " + snapshot.child("firstName").getValue().toString());
                 bundle.putString("fullName", snapshot.child("lastName").getValue().toString() + ", " + snapshot.child("firstName").getValue().toString());
-
             }
 
             @Override

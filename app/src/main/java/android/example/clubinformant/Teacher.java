@@ -1,50 +1,45 @@
 package android.example.clubinformant;
 
 public class Teacher {
-    private String fName;
-    private String lName;
-    private String eMail;
-    private String id;
+    private String firstName;
+    private String lastName;
+    private String email;
     private String status;
+    private String uid;
 
-    public Teacher(String fName, String lName, String eMail, String id, String status) {
-        this.fName = fName;
-        this.lName = lName;
-        this.eMail = eMail;
-        this.id = id;
+    public Teacher() {
+    }
+
+    public Teacher(String firstName, String lastName, String email, String status, String uid) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
         this.status = status;
+        this.uid = uid;
     }
 
-    public String fName() {
-        return fName;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void fName(String fName) {
-        this.fName = fName;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String lNrLName() {
-        return lName;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void lNrLName(String lName) {
-        this.lName = lName;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public String eMail() {
-        return eMail;
+    public String getEmail() {
+        return email;
     }
 
-    public void eMail(String eMail) {
-        this.eMail = eMail;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getStatus() {
@@ -53,5 +48,13 @@ public class Teacher {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 }

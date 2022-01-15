@@ -21,11 +21,11 @@
             android:textSize="15sp" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_members_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_members_text"
-            android:id="@+id/rv_members_recycler_view"
-            />
+            android:paddingBottom="75dp" />
     </RelativeLayout>
 
 </FrameLayout>

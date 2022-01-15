@@ -1,7 +1,6 @@
 package android.example.clubinformant;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MembersCardAdapter extends RecyclerView.Adapter<MembersCardAdapter.ViewHolder> {
     Context context;
@@ -41,10 +42,12 @@ public class MembersCardAdapter extends RecyclerView.Adapter<MembersCardAdapter.
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private TextView fullName;
+        private CircleImageView profilePicture;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             fullName = itemView.findViewById(R.id.tv_full_name);
+            profilePicture = itemView.findViewById(R.id.iv_members_profile_picture);
         }
     }
 }

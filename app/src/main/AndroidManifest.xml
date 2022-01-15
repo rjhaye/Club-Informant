@@ -14,19 +14,29 @@
         android:theme="@style/Theme.MaterialComponents.Light.NoActionBar">
         <activity
             android:name=".HomeActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:resizeableActivity="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".SignInActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:resizeableActivity="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".StudentRegistrationForm"
-            android:exported="false" />
+            android:exported="false"
+            android:resizeableActivity="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".TeacherRegistrationForm"
-            android:exported="false" />
+            android:exported="false"
+            android:resizeableActivity="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:resizeableActivity="false"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -23,6 +23,8 @@ public class MembersFragment extends Fragment {
 
     RecyclerView customRecyclerView;
     DatabaseReference clubReference;
+    DatabaseReference statusReference;
+    DatabaseReference membersReference;
     ArrayList<Student> students;
     MembersCardAdapter membersCardAdapter;
     String club;
@@ -45,113 +47,149 @@ public class MembersFragment extends Fragment {
         clubReference = FirebaseDatabase.getInstance().getReference("Users/" + FirebaseAuth.getInstance().getCurrentUser().getUid() + "/clubChoice");
         students = new ArrayList<>();
         membersCardAdapter = new MembersCardAdapter(getContext(), students);
+        statusReference = FirebaseDatabase.getInstance().getReference("Users/" + FirebaseAuth.getInstance().getCurrentUser().getUid() + "/status");
+        membersReference = FirebaseDatabase.getInstance().getReference("Users/");
     }
 
     //This method is used to display the members by specific club.
     public void getStudentInfo() {
-        //Knowing what club
-        clubReference.addListenerForSingleValueEvent(new ValueEventListener() {
+        statusReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                club = snapshot.getValue().toString();
-                switch (club) {
-                    case "AZTECH CLUB":
-                        DatabaseReference aztechReference = FirebaseDatabase.getInstance().getReference("Clubs/AZTECH CLUB");
-                        aztechReference.addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                Student studentInfo;
-                                for (DataSnapshot name : snapshot.getChildren()) {
+                if (snapshot.getValue().toString().equals("Student")) {
+                    //Knowing what club
+                    clubReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                            club = snapshot.getValue().toString();
+                            switch (club) {
+                                case "AZTECH CLUB":
+                                    DatabaseReference aztechReference = FirebaseDatabase.getInstance().getReference("Clubs/AZTECH CLUB");
+                                    aztechReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            Student studentInfo;
+                                            for (DataSnapshot name : snapshot.getChildren()) {
+                                                studentInfo = name.getValue(Student.class);
+                                                students.add(studentInfo);
+                                            }
+                                            membersCardAdapter.notifyDataSetChanged();
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
+                                    break;
+                                case "MAHARLIKA CLUB":
+                                    DatabaseReference maharlikaReference = FirebaseDatabase.getInstance().getReference("Clubs/MAHARLIKA CLUB");
+                                    maharlikaReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            Student studentInfo;
+                                            for (DataSnapshot name : snapshot.getChildren()) {
+                                                studentInfo = name.getValue(Student.class);
+                                                students.add(studentInfo);
+                                            }
+                                            membersCardAdapter.notifyDataSetChanged();
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
+                                    break;
+                                case "PANDAYWIKA CLUB":
+                                    DatabaseReference pandayWikaReference = FirebaseDatabase.getInstance().getReference("Clubs/PANDAYWIKA CLUB");
+                                    pandayWikaReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            Student studentInfo;
+                                            for (DataSnapshot name : snapshot.getChildren()) {
+                                                studentInfo = name.getValue(Student.class);
+                                                students.add(studentInfo);
+                                            }
+                                            membersCardAdapter.notifyDataSetChanged();
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
+                                    break;
+                                case "TEATRO MILENYO CLUB":
+                                    DatabaseReference teatroMilenyoReference = FirebaseDatabase.getInstance().getReference("Clubs/TEATRO MILENYO CLUB");
+                                    teatroMilenyoReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            Student studentInfo;
+                                            for (DataSnapshot name : snapshot.getChildren()) {
+                                                studentInfo = name.getValue(Student.class);
+                                                students.add(studentInfo);
+                                            }
+                                            membersCardAdapter.notifyDataSetChanged();
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
+                                    break;
+                                case "WE MATTER CLUB":
+                                    DatabaseReference weMatterReference = FirebaseDatabase.getInstance().getReference("Clubs/WE MATTER CLUB");
+                                    weMatterReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            Student studentInfo;
+                                            for (DataSnapshot name : snapshot.getChildren()) {
+                                                studentInfo = name.getValue(Student.class);
+                                                students.add(studentInfo);
+                                            }
+                                            membersCardAdapter.notifyDataSetChanged();
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+                } else {
+                    membersReference.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            Student studentInfo;
+                            for (DataSnapshot name : snapshot.getChildren()) {
+                                if (name.child("status").getValue().toString().equals("Student")) {
                                     studentInfo = name.getValue(Student.class);
                                     students.add(studentInfo);
+                                } else {
+
                                 }
                                 membersCardAdapter.notifyDataSetChanged();
                             }
+                        }
 
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
 
-                            }
-                        });
-                        break;
-                    case "MAHARLIKA CLUB":
-                        DatabaseReference maharlikaReference = FirebaseDatabase.getInstance().getReference("Clubs/MAHARLIKA CLUB");
-                        maharlikaReference.addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                Student studentInfo;
-                                for (DataSnapshot name : snapshot.getChildren()) {
-                                    studentInfo = name.getValue(Student.class);
-                                    students.add(studentInfo);
-                                }
-                                membersCardAdapter.notifyDataSetChanged();
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-
-                            }
-                        });
-                        break;
-                    case "PANDAYWIKA CLUB":
-                        DatabaseReference pandayWikaReference = FirebaseDatabase.getInstance().getReference("Clubs/PANDAYWIKA CLUB");
-                        pandayWikaReference.addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                Student studentInfo;
-                                for (DataSnapshot name : snapshot.getChildren()) {
-                                    studentInfo = name.getValue(Student.class);
-                                    students.add(studentInfo);
-                                }
-                                membersCardAdapter.notifyDataSetChanged();
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-
-                            }
-                        });
-                        break;
-                    case "TEATRO MILENYO CLUB":
-                        DatabaseReference teatroMilenyoReference = FirebaseDatabase.getInstance().getReference("Clubs/TEATRO MILENYO CLUB");
-                        teatroMilenyoReference.addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                Student studentInfo;
-                                for (DataSnapshot name : snapshot.getChildren()) {
-                                    studentInfo = name.getValue(Student.class);
-                                    students.add(studentInfo);
-                                }
-                                membersCardAdapter.notifyDataSetChanged();
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-
-                            }
-                        });
-                        break;
-                    case "WE MATTER CLUB":
-                        DatabaseReference weMatterReference = FirebaseDatabase.getInstance().getReference("Clubs/WE MATTER CLUB");
-                        weMatterReference.addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                Student studentInfo;
-                                for (DataSnapshot name : snapshot.getChildren()) {
-                                    studentInfo = name.getValue(Student.class);
-                                    students.add(studentInfo);
-                                }
-                                membersCardAdapter.notifyDataSetChanged();
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-
-                            }
-                        });
-                        break;
-                    default:
-                        break;
+                        }
+                    });
                 }
             }
 

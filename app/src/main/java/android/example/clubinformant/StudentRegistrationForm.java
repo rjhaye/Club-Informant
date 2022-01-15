@@ -1,6 +1,7 @@
 package android.example.clubinformant;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -9,6 +10,9 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -22,10 +26,26 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class StudentRegistrationForm extends AppCompatActivity implements View.OnClickListener {
+    FirebaseStorage storage;
+    Uri imageUri;
+    private CircleImageView profilePicture;
+    ActivityResultLauncher<String> mGetContent = registerForActivityResult(new ActivityResultContracts.GetContent(), new ActivityResultCallback<Uri>() {
+        @Override
+        public void onActivityResult(Uri result) {
+            if (result != null) {
+                profilePicture.setImageURI(result);
+                imageUri = result;
+            }
+        }
+    });
     private EditText studentId;
     private EditText fname;
     private EditText lname;
@@ -45,6 +65,8 @@ public class StudentRegistrationForm extends AppCompatActivity implements View.O
         initWidgets();
         implementSpinner();
         signUpBtn.setOnClickListener(this);
+        signInBtn.setOnClickListener(this);
+        profilePicture.setOnClickListener(this);
 
     }
 
@@ -59,6 +81,8 @@ public class StudentRegistrationForm extends AppCompatActivity implements View.O
         mAuth = FirebaseAuth.getInstance();
         signUpBtn = findViewById(R.id.btn_student_sign_up);
         signInBtn = findViewById(R.id.btn_student_sign_in);
+        profilePicture = findViewById(R.id.iv_student_select_image);
+        storage = FirebaseStorage.getInstance();
     }
 
     public void implementSpinner() {
@@ -88,6 +112,9 @@ public class StudentRegistrationForm extends AppCompatActivity implements View.O
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.iv_student_select_image:
+                mGetContent.launch("image/*");
+                break;
             case R.id.btn_student_sign_up:
                 DatabaseReference clubsNumberReference = FirebaseDatabase.getInstance().getReference("Clubs/" + club + "/");
                 if (studentId.getText().toString().isEmpty() || fname.getText().toString().isEmpty() || lname.getText().toString().isEmpty() || eMail.getText().toString().isEmpty()
@@ -107,6 +134,7 @@ public class StudentRegistrationForm extends AppCompatActivity implements View.O
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()) {
                                         saveInfo();
+                                        uploadImage();
                                         Toast.makeText(StudentRegistrationForm.this, "Registered Successfully!", Toast.LENGTH_SHORT).show();
                                         Intent intent = new Intent(StudentRegistrationForm.this, HomeActivity.class);
                                         startActivity(intent);
@@ -129,6 +157,13 @@ public class StudentRegistrationForm extends AppCompatActivity implements View.O
                 break;
             default:
                 break;
+        }
+    }
+
+    private void uploadImage() {
+        if (imageUri != null) {
+            StorageReference storageReference = storage.getReference("images/students/" + FirebaseAuth.getInstance().getCurrentUser().getUid());
+            storageReference.putFile(imageUri);
         }
     }
 
