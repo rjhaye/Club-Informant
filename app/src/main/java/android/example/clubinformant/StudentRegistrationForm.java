@@ -174,10 +174,17 @@ public class StudentRegistrationForm extends AppCompatActivity implements View.O
         //Saving info in Users directory
         DatabaseReference referenceByUser = FirebaseDatabase.getInstance().getReference("Users/" + FirebaseAuth.getInstance().getCurrentUser().getUid() + "/");
         //Adding the data
-        Student newUser = new Student(studentId.getText().toString(), fname.getText().toString(), lname.getText().toString(), club, eMail.getText().toString(),
-                FirebaseAuth.getInstance().getCurrentUser().getUid(), "Student");
-        referenceByClub.setValue(newUser).addOnFailureListener(e -> Toast.makeText(StudentRegistrationForm.this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show());
-        //TODO: Kailangan ba ng addOnFailureLister?
+        Student newUser;
+        if (imageUri != null) {
+            newUser = new Student(studentId.getText().toString(), fname.getText().toString(), lname.getText().toString(), club, eMail.getText().toString(),
+                    FirebaseAuth.getInstance().getCurrentUser().getUid(), "Student", "images/students/" + FirebaseAuth.getInstance().getCurrentUser().getUid());
+            referenceByClub.setValue(newUser);
+        } else {
+            newUser = new Student(studentId.getText().toString(), fname.getText().toString(), lname.getText().toString(), club, eMail.getText().toString(),
+                    FirebaseAuth.getInstance().getCurrentUser().getUid(), "Student");
+            referenceByClub.setValue(newUser).addOnFailureListener(e -> Toast.makeText(StudentRegistrationForm.this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show());
+            //TODO: Kailangan ba ng addOnFailureLister?
+        }
         referenceByUser.setValue(newUser);
     }
 }

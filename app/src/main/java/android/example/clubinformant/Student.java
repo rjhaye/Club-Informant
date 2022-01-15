@@ -8,6 +8,7 @@ public class Student {
     private String email;
     private String uid;
     private String status;
+    private String imageUrl;
 
     public Student() {
     }
@@ -20,6 +21,17 @@ public class Student {
         this.email = email;
         this.uid = uid;
         this.status = status;
+    }
+
+    public Student(String id, String firstName, String lastName, String clubChoice, String email, String uid, String status, String imageUrl) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.clubChoice = clubChoice;
+        this.email = email;
+        this.uid = uid;
+        this.status = status;
+        this.imageUrl = imageUrl;
     }
 
     public String getId() {
@@ -76,5 +88,13 @@ public class Student {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

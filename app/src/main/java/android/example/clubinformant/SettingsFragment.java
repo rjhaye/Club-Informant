@@ -55,9 +55,11 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
         aboutAppBtn.setOnClickListener(this);
         logOutBtn.setOnClickListener(this);
         changeCredentialsBtn.setOnClickListener(this);
-        if (bundle != null) {
-            name = bundle.getString("fullName");
-            userName.setText(name);
+        //Check if the full name is fetch from database
+        if (bundle.getString("fullName") == null) {
+            userName.setText("Welcome, user!");
+        } else {
+            userName.setText(bundle.getString("fullName"));
         }
         checkStatus();
         return view;
@@ -68,20 +70,15 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
         statusReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                while (storageReference == null) {
-                    try {
-                        if (snapshot.child("status").getValue().toString().equals("Student")) {
-                            storageReference = FirebaseStorage.getInstance().getReference("images/students/" + user.getCurrentUser().getUid());
-                        } else {
-                            storageReference = FirebaseStorage.getInstance().getReference("images/teachers/" + user.getCurrentUser().getUid());
-                        }
-                    } catch (Exception e) {
-                        System.out.println(e);
-                    }
+                try {
+                    storageReference = FirebaseStorage.getInstance("gs://sti-club-informant.appspot.com").getReference(snapshot.child("imageUrl").getValue().toString());
+                    GlideApp.with(getContext())
+                            .load(storageReference)
+                            .placeholder(R.drawable.select_image)
+                            .into(profilePicture);
+                } catch (Exception e) {
+                    System.out.println(e);
                 }
-                GlideApp.with(getContext())
-                        .load(storageReference)
-                        .into(profilePicture);
             }
 
             @Override
