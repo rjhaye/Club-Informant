@@ -46,6 +46,7 @@ public class StudentRegistrationForm extends AppCompatActivity implements View.O
             }
         }
     });
+    private String imageUrl;
     private EditText studentId;
     private EditText fname;
     private EditText lname;

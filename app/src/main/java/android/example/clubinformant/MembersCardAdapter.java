@@ -1,7 +1,6 @@
 package android.example.clubinformant;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,8 +36,7 @@ public class MembersCardAdapter extends RecyclerView.Adapter<MembersCardAdapter.
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Student member = students.get(position);
         holder.fullName.setText(member.getLastName() + ", " + member.getFirstName());
-        if (member.getImageUrl() != null){
-            Log.d("TAG", "onBindViewHolder: process");
+        if (member.getImageUrl() != null) {
             StorageReference imageUrl = FirebaseStorage.getInstance("gs://sti-club-informant.appspot.com").getReference(member.getImageUrl());
             GlideApp.with(context)
                     .load(imageUrl)
