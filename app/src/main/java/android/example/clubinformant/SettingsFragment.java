@@ -205,7 +205,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
                         if (snapshot.child("imageUrl").exists()) {
                             Log.d("Existing", "Result: imageUrl does exist");
                         } else {
-                            databaseReference.child("imageUrl").setValue("images/students/" + user.getCurrentUser().getUid());
+                            databaseReference.child("imageUrl").setValue("images/teachers/" + user.getCurrentUser().getUid());
                             Log.d("Existing", "Result: imageUrl does not exist");
                         }
                     } catch (Exception e) {
