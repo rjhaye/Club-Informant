@@ -115,8 +115,14 @@ public class TeacherRegistrationForm extends AppCompatActivity implements View.O
 
     public void saveInfo() {
         DatabaseReference userReference = FirebaseDatabase.getInstance().getReference("Users/" + FirebaseAuth.getInstance().getCurrentUser().getUid());
-        Teacher newUser = new Teacher(fname.getText().toString(), lname.getText().toString(), eMail.getText().toString(), "Teacher",
-                FirebaseAuth.getInstance().getCurrentUser().getUid());
+        Teacher newUser;
+        if (imageUri != null) {
+            newUser = new Teacher(fname.getText().toString(), lname.getText().toString(), eMail.getText().toString(), "Teacher",
+                    FirebaseAuth.getInstance().getCurrentUser().getUid(), "images/teachers/");
+        } else {
+            newUser = new Teacher(fname.getText().toString(), lname.getText().toString(), eMail.getText().toString(), "Teacher",
+                    FirebaseAuth.getInstance().getCurrentUser().getUid());
+        }
         userReference.setValue(newUser);
     }
 }

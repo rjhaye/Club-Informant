@@ -61,7 +61,6 @@ public class MembersFragment extends Fragment {
                     clubReference.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-
                             club = snapshot.getValue().toString();
                             switch (club) {
                                 case "AZTECH CLUB":

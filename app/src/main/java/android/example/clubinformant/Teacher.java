@@ -6,6 +6,7 @@ public class Teacher {
     private String email;
     private String status;
     private String uid;
+    public String imageUrl;
 
     public Teacher() {
     }
@@ -16,6 +17,15 @@ public class Teacher {
         this.email = email;
         this.status = status;
         this.uid = uid;
+    }
+
+    public Teacher(String firstName, String lastName, String email, String status, String uid, String imageUrl) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.status = status;
+        this.uid = uid;
+        this.imageUrl = imageUrl;
     }
 
     public String getFirstName() {
@@ -56,5 +66,13 @@ public class Teacher {
 
     public void setUid(String uid) {
         this.uid = uid;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

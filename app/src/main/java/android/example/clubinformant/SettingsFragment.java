@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,8 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.auth.FirebaseAuth;
@@ -47,32 +50,32 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
             if (result != null) {
                 profilePicture.setImageURI(result);
                 imageUri = result;
-            }
-            MaterialAlertDialogBuilder confirmPicUpload = new MaterialAlertDialogBuilder(getContext());
-            confirmPicUpload.setMessage("Do you want to upload this image?")
-                    .setPositiveButton("Yes", (dialog, which) -> uploadInfo())
-                    .setNegativeButton("No", (dialog, which) -> {
-                        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users/" + user.getCurrentUser().getUid());
-                        databaseReference.addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                try {
-                                    storageReference = FirebaseStorage.getInstance("gs://sti-club-informant.appspot.com").getReference(snapshot.child("imageUrl").getValue().toString());
-                                    GlideApp.with(getContext())
-                                            .load(storageReference)
-                                            .placeholder(R.drawable.select_image)
-                                            .into(profilePicture);
-                                } catch (Exception e) {
-                                    System.out.println(e);
+                MaterialAlertDialogBuilder confirmPicUpload = new MaterialAlertDialogBuilder(getContext());
+                confirmPicUpload.setMessage("Do you want to upload this image?")
+                        .setPositiveButton("Yes", (dialog, which) -> uploadInfo())
+                        .setNegativeButton("No", (dialog, which) -> {
+                            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users/" + user.getCurrentUser().getUid());
+                            databaseReference.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    try {
+                                        storageReference = FirebaseStorage.getInstance("gs://sti-club-informant.appspot.com").getReference(snapshot.child("imageUrl").getValue().toString());
+                                        GlideApp.with(getContext())
+                                                .load(storageReference)
+                                                .placeholder(R.drawable.select_image)
+                                                .into(profilePicture);
+                                    } catch (Exception e) {
+                                        System.out.println(e);
+                                    }
                                 }
-                            }
 
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-
-                            }
-                        });
-                    }).show();
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+                                    System.out.println(error);
+                                }
+                            });
+                        }).show();
+            }
         }
     });
 
@@ -105,31 +108,6 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
         return view;
     }
 
-    private void checkStatus() {
-        DatabaseReference statusReference = FirebaseDatabase.getInstance().getReference("Users/" + user.getCurrentUser().getUid());
-        statusReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                try {
-                    storageReference = FirebaseStorage.getInstance("gs://sti-club-informant.appspot.com").getReference(snapshot.child("imageUrl").getValue().toString());
-                    GlideApp.with(getContext())
-                            .load(storageReference)
-                            .placeholder(R.drawable.select_image)
-                            .into(profilePicture);
-                } catch (Exception e) {
-                    System.out.println(e);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-
-    }
-
     public void initWidgets(View view) {
         userName = view.findViewById(R.id.tv_user_name);
         basicInfoBtn = view.findViewById(R.id.card_basic_info);
@@ -142,6 +120,33 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
         profilePicture = view.findViewById(R.id.iv_profile_picture);
     }
 
+    //  This method is used to fetch the profile picture in the FirebaseStorage using the link found in Realtime Database.
+    private void checkStatus() {
+        DatabaseReference statusReference = FirebaseDatabase.getInstance().getReference("Users/" + user.getCurrentUser().getUid());
+        statusReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                try {
+                    storageReference = FirebaseStorage.getInstance("gs://sti-club-informant.appspot.com").getReference(snapshot.child("imageUrl").getValue().toString());
+                    GlideApp.with(getContext())
+                            .load(storageReference)
+                            .placeholder(R.drawable.select_image)
+                            .apply(RequestOptions.skipMemoryCacheOf(true))
+                            .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.NONE))
+                            .into(profilePicture);
+                } catch (Exception e) {
+                    System.out.println(e);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                System.out.println(error);
+            }
+        });
+    }
+
+    //  This method is used to set the actions to be performed once a button is clicked.
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -171,6 +176,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
         }
     }
 
+    //  This method is used to upload the updated profile picture in FirebaseStorage
     private void uploadInfo() {
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users/" + user.getCurrentUser().getUid());
         FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
@@ -180,17 +186,38 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
                 if (snapshot.child("status").getValue().equals("Student")) {
                     StorageReference storageReference = firebaseStorage.getReference("images/students/" + user.getCurrentUser().getUid());
                     storageReference.putFile(imageUri);
+                    //Used to add the link of the uploaded profile picture in the Realtime Database if the imageUrl is not yet existing.
+                    try {
+                        if (snapshot.child("imageUrl").exists()) {
+                            Log.d("Existing", "Result: imageUrl does exist");
+                        } else {
+                            databaseReference.child("imageUrl").setValue("images/students/" + user.getCurrentUser().getUid());
+                            Log.d("Existing", "Result: imageUrl does not exist");
+                        }
+                    } catch (Exception e) {
+                        System.out.println(e);
+                    }
                 } else {
                     StorageReference storageReference = firebaseStorage.getReference("images/teachers/" + user.getCurrentUser().getUid());
                     storageReference.putFile(imageUri);
+                    //Used to add the link of the uploaded profile picture in the Realtime Database if the imageUrl is not yet existing.
+                    try {
+                        if (snapshot.child("imageUrl").exists()) {
+                            Log.d("Existing", "Result: imageUrl does exist");
+                        } else {
+                            databaseReference.child("imageUrl").setValue("images/students/" + user.getCurrentUser().getUid());
+                            Log.d("Existing", "Result: imageUrl does not exist");
+                        }
+                    } catch (Exception e) {
+                        System.out.println(e);
+                    }
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                System.out.println(error);
             }
         });
-
     }
 }

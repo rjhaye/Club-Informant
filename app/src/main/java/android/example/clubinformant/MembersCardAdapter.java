@@ -9,6 +9,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -35,14 +42,30 @@ public class MembersCardAdapter extends RecyclerView.Adapter<MembersCardAdapter.
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Student member = students.get(position);
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users/" + member.getUid());
         holder.fullName.setText(member.getLastName() + ", " + member.getFirstName());
-        if (member.getImageUrl() != null) {
-            StorageReference imageUrl = FirebaseStorage.getInstance("gs://sti-club-informant.appspot.com").getReference(member.getImageUrl());
-            GlideApp.with(context)
-                    .load(imageUrl)
-                    .placeholder(R.drawable.select_image)
-                    .into(holder.profilePicture);
-        }
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.child("imageUrl").exists()) {
+                    String imageUrl = snapshot.child("imageUrl").getValue().toString();
+                    StorageReference imageUrlRef = FirebaseStorage.getInstance("gs://sti-club-informant.appspot.com").getReference(imageUrl);
+                    GlideApp.with(context)
+                            .load(imageUrlRef)
+                            .placeholder(R.drawable.select_image)
+                            .apply(RequestOptions.skipMemoryCacheOf(true))
+                            .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.NONE))
+                            .into(holder.profilePicture);
+                } else {
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     @Override
