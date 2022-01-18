@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:gravity="center_vertical"
+    tools:context=".StudentRegistrationForm">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/iv_student_select_image"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/select_image"
+                app:civ_border_color="@color/black"
+                app:civ_border_width="2dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/et_student_id_sign_up"
+                android:layout_width="0dp"
+                android:layout_height="55dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/custom_style_text_field"
+                android:drawableStart="@drawable/ic_id_card"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/lobster_regular"
+                android:hint="Student's ID"
+                android:importantForAutofill="no"
+                android:inputType="number"
+                android:singleLine="true"
+                android:textSize="25sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_student_select_image"
+                app:layout_constraintWidth_percent=".9" />
+
+            <EditText
+                android:id="@+id/et_student_fname_sign_up"
+                android:layout_width="0dp"
+                android:layout_height="55dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/custom_style_text_field"
+                android:fontFamily="@font/lobster_regular"
+                android:gravity="center"
+                android:hint="First Name"
+                android:importantForAutofill="no"
+                android:inputType="textCapWords"
+                android:singleLine="true"
+                android:textSize="25sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/et_student_id_sign_up"
+                app:layout_constraintWidth_percent=".9" />
+
+            <EditText
+                android:id="@+id/et_student_lname_sign_up"
+                android:layout_width="0dp"
+                android:layout_height="55dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/custom_style_text_field"
+                android:fontFamily="@font/lobster_regular"
+                android:gravity="center"
+                android:hint="Last Name"
+                android:importantForAutofill="no"
+                android:inputType="textCapWords"
+                android:singleLine="true"
+                android:textSize="25sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/et_student_fname_sign_up"
+                app:layout_constraintWidth_percent=".9" />
+
+            <LinearLayout
+                android:id="@+id/ll_club_choices_sign_up"
+                android:layout_width="340dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/et_student_lname_sign_up">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/lobster_regular"
+                    android:gravity="center_vertical"
+                    android:text="Clubs:"
+                    android:textSize="25sp" />
+
+                <Spinner
+                    android:id="@+id/spinner_club_choices"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical" />
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/et_student_email_sign_up"
+                android:layout_width="0dp"
+                android:layout_height="55dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/custom_style_text_field"
+                android:drawableStart="@drawable/ic_email"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/lobster_regular"
+                android:hint="Email"
+                android:importantForAutofill="no"
+                android:inputType="textEmailAddress"
+                android:singleLine="true"
+                android:textSize="25sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ll_club_choices_sign_up"
+                app:layout_constraintWidth_percent=".9" />
+
+            <EditText
+                android:id="@+id/et_student_password_sign_up"
+                android:layout_width="0dp"
+                android:layout_height="55dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/custom_style_text_field"
+                android:drawableStart="@drawable/ic_password"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/lobster_regular"
+                android:hint="Password"
+                android:importantForAutofill="no"
+                android:inputType="textPassword"
+                android:singleLine="true"
+                android:textSize="25sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/et_student_email_sign_up"
+                app:layout_constraintWidth_percent=".9" />
+
+            <EditText
+                android:id="@+id/et_student_registration_key_sign_up"
+                android:layout_width="0dp"
+                android:layout_height="55dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/custom_style_text_field"
+                android:drawableStart="@drawable/ic_key"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/lobster_regular"
+                android:hint="Registration Key"
+                android:importantForAutofill="no"
+                android:singleLine="true"
+                android:textSize="25sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/et_student_password_sign_up"
+                app:layout_constraintWidth_percent=".9" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_student_sign_up"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="5dp"
+                android:backgroundTint="@color/pastel_purple"
+                android:fontFamily="@font/lobster_regular"
+                android:text="Sign Up"
+                android:textAllCaps="false"
+                android:textSize="20dp"
+                app:cornerRadius="30dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/et_student_registration_key_sign_up"
+                app:layout_constraintWidth_percent=".5" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/vertical_bar"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_already_registered_text"
+                app:layout_constraintHorizontal_bias=".8"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/tv_already_registered_text"
+                app:layout_constraintTop_toTopOf="@+id/tv_already_registered_text"
+                app:layout_constraintWidth_percent=".25" />
+
+            <TextView
+                android:id="@+id/tv_already_registered_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/lobster_regular"
+                android:text="Already Registered?"
+                android:textSize="20dp"
+                app:layout_constraintLeft_toLeftOf="@id/btn_student_sign_up"
+                app:layout_constraintRight_toRightOf="@id/btn_student_sign_up"
+                app:layout_constraintTop_toBottomOf="@id/btn_student_sign_up" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/vertical_bar"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_already_registered_text"
+                app:layout_constraintHorizontal_bias=".2"
+                app:layout_constraintLeft_toRightOf="@id/tv_already_registered_text"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tv_already_registered_text"
+                app:layout_constraintWidth_percent=".25" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_student_sign_in"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="5dp"
+                android:backgroundTint="@color/pastel_red"
+                android:fontFamily="@font/lobster_regular"
+                android:text="Sign In"
+                android:textAllCaps="false"
+                android:textSize="20dp"
+                app:cornerRadius="30dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_already_registered_text"
+                app:layout_constraintWidth_percent=".5" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+</RelativeLayout>

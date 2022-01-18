@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:gravity="center_vertical"
+    tools:context=".MainActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_main_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/main_image"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_register_as_a_teacher"
+            android:layout_width="0dp"
+            android:layout_height="65dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#7471FF"
+            android:fontFamily="@font/lobster_regular"
+            android:text="Register as a Teacher"
+            android:textAllCaps="false"
+            android:textSize="20dp"
+            app:cornerRadius="50dp"
+            app:layout_constraintLeft_toLeftOf="@+id/iv_main_image"
+            app:layout_constraintRight_toRightOf="@id/iv_main_image"
+            app:layout_constraintTop_toBottomOf="@id/iv_main_image"
+            app:layout_constraintWidth_percent=".8" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_register_as_a_student"
+            android:layout_width="0dp"
+            android:layout_height="65dp"
+            android:layout_below="@+id/btn_register_as_a_teacher"
+            android:backgroundTint="#92E3A9"
+            android:fontFamily="@font/lobster_regular"
+            android:text="Register as a Student"
+            android:textAllCaps="false"
+            android:textSize="20dp"
+            app:cornerRadius="50dp"
+            app:layout_constraintLeft_toLeftOf="@id/btn_register_as_a_teacher"
+            app:layout_constraintRight_toRightOf="@id/btn_register_as_a_teacher"
+            app:layout_constraintTop_toBottomOf="@+id/btn_register_as_a_teacher"
+            app:layout_constraintWidth_percent=".8" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_go_to_sign_in"
+            android:layout_width="0dp"
+            android:layout_height="65dp"
+            android:layout_below="@+id/btn_register_as_a_student"
+            android:backgroundTint="#EF8B8B"
+            android:fontFamily="@font/lobster_regular"
+            android:text="Sign In"
+            android:textAllCaps="false"
+            android:textSize="20dp"
+            app:cornerRadius="50dp"
+            app:layout_constraintLeft_toLeftOf="@id/iv_main_image"
+            app:layout_constraintRight_toRightOf="@id/iv_main_image"
+            app:layout_constraintTop_toBottomOf="@id/btn_register_as_a_student"
+            app:layout_constraintWidth_percent=".8" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</RelativeLayout>

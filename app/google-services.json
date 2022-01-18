@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "844391843427",
+    "project_id": "sti-club-informant",
+    "storage_bucket": "sti-club-informant.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:844391843427:android:a9161ec79a216dcc219a56",
+        "android_client_info": {
+          "package_name": "android.example.clubinformant"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "844391843427-f9utac0sdbm2g41tjrg6uglf61n2dv9u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCygP11vZYjimyBQJuO7huoCKS7RSViC_w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "844391843427-f9utac0sdbm2g41tjrg6uglf61n2dv9u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
