@@ -55,6 +55,8 @@ public class HomeActivity extends AppCompatActivity {
                     case R.id.menu_settings:
                         fragment = new SettingsFragment();
                         break;
+                    case R.id.nav_search:
+                        fragment = new MembersFragment();
                     default:
                         break;
                 }

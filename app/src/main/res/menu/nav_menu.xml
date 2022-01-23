@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/nav_search"
+        android:icon="@drawable/ic_search"
+        android:title="Search"
+        app:actionViewClass="android.widget.SearchView"
+        app:showAsAction="ifRoom|withText"
+        />
+
     <item
         android:id="@+id/menu_announcements"
         android:icon="@drawable/ic_announcements"
@@ -19,4 +28,5 @@
         android:title="Settings"
         app:cnb_backgroundColor="#92E3A9"
         app:cnb_iconColor="@color/white" />
+
 </menu>
