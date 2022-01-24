@@ -18,6 +18,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private FirebaseUser user;
 
 
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +38,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             studentSignUpBtn.setOnClickListener(this);
             signInBtn.setOnClickListener(this);
         }
+
+
+
     }
 
     public void initWidgets() {
@@ -61,5 +67,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             default:
                 break;
         }
+
     }
+
 }
